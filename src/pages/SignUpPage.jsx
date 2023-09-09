@@ -3,7 +3,7 @@ import SocialLoginCard from "../components/SocialLoginCard";
 
 const SignUpPage = () => {
   return (
-    <div className="flex flex-col items-center py-10">
+    <div className="min-h-screen flex flex-col items-center justify-center py-10">
       <SignUpCard />
       <SocialLoginCard />
     </div>

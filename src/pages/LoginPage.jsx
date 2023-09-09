@@ -1,7 +1,11 @@
+import LoginCard from "../components/LoginCard";
+import SocialLoginCard from "../components/SocialLoginCard";
+
 const LoginPage = () => {
   return (
-    <div>
-      <h1>Login Page</h1>
+    <div className="min-h-screen flex flex-col items-center justify-center py-10">
+      <LoginCard />
+      <SocialLoginCard />
     </div>
   );
 };
