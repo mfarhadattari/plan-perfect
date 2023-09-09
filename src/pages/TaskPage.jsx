@@ -1,3 +1,5 @@
+import { useState } from "react";
+import AddTaskModal from "../components/AddTaskModal";
 import TaskCard from "../components/TaskCard";
 
 const TaskPage = () => {
@@ -38,14 +40,19 @@ const TaskPage = () => {
   const progressTask = tasks?.filter((task) => task.status === "in progress");
   const completedTask = tasks?.filter((task) => task.status === "completed");
 
+  const [open, setOpen] = useState(false);
+
   return (
     <>
+      <AddTaskModal open={open} setOpen={setOpen} />
       <div className="h-screen px-5 md:px-10 pt-10">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="font-semibold text-3xl uppercase">MY Tasks</h1>
           </div>
-          <button className="btn-primary h-fit">Add Task</button>
+          <button className="btn-primary h-fit" onClick={() => setOpen(true)}>
+            Add Task
+          </button>
         </div>
         <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
           <div className="relative  overflow-auto">
