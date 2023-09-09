@@ -2,3 +2,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-primary {
+  @apply bg-blue-700 px-3 py-2 text-white rounded-md uppercase font-medium;
+}
+
+.bg-primary {
+  @apply bg-blue-700;
+}
