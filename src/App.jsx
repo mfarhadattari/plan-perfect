@@ -1,10 +1,15 @@
 import { Outlet } from "react-router-dom";
+import { Sidebar } from "./components/layout/Sidebar";
 
 function App() {
   return (
-    <div>
-      <h1>Plan Perfect</h1>
-      <Outlet />
+    <div className="flex">
+      <div className="w-[100px]">
+        <Sidebar />
+      </div>
+      <div className="w-full">
+        <Outlet />
+      </div>
     </div>
   );
 }
