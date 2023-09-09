@@ -1,7 +1,11 @@
+import SignUpCard from "../components/SignUpCard";
+import SocialLoginCard from "../components/SocialLoginCard";
+
 const SignUpPage = () => {
   return (
-    <div>
-      <h1>Sign Up page</h1>
+    <div className="flex flex-col items-center py-10">
+      <SignUpCard />
+      <SocialLoginCard />
     </div>
   );
 };
