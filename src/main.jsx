@@ -1,16 +1,20 @@
 import { ThemeProvider } from "@material-tailwind/react";
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import "./index.css";
+import store from "./redux/store";
 import routes from "./routes/routes";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <div className="font-garamond">
-        <RouterProvider router={routes} />
-      </div>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <div className="font-fira-code">
+          <RouterProvider router={routes} />
+        </div>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );

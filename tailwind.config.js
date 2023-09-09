@@ -6,7 +6,7 @@ export default withMT({
   theme: {
     extend: {
       fontFamily: {
-        garamond: ["EB Garamond", "serif"],
+        "fira-code": ["Fira Code", "monospace"],
       },
     },
   },

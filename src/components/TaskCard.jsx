@@ -35,7 +35,7 @@ const TaskCard = ({ task }) => {
         <div className="flex gap-3">
           {task?.status === "pending" && (
             <button title="Delete">
-              <TrashIcon className="h-5 w-5 text-red-500" />
+              <TrashIcon className="h-6 w-6 text-red-500" />
             </button>
           )}
           {task?.status !== "completed" ? (
@@ -43,18 +43,18 @@ const TaskCard = ({ task }) => {
               {task?.status === "in progress" ? (
                 <CheckCircleIcon
                   title="Make Completed"
-                  className="h-5 w-5 text-green-500"
+                  className="h-6 w-6 text-green-500"
                 />
               ) : (
                 <PlayCircleIcon
                   title="Start Task"
-                  className="h-5 w-5 text-blue-500"
+                  className="h-6 w-6 text-blue-500"
                 />
               )}
             </button>
           ) : (
             <button title="Archive">
-              <ArchiveBoxIcon className="h-5 w-5 text-red-500" />
+              <ArchiveBoxIcon className="h-6 w-6 text-red-500" />
             </button>
           )}
         </div>
