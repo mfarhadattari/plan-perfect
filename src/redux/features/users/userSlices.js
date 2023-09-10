@@ -13,7 +13,24 @@ const initialState = {
 const userSlice = createSlice({
   name: "userSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      state.name = "";
+      state.email = "";
+      state.avatar = "";
+      state.isLoading = true;
+      state.isError = false;
+      state.error = "";
+    },
+    setLoading: (state, { payload }) => {
+      state.isLoading = payload;
+    },
+    setError: (state, { payload }) => {
+      state.isError = true;
+      state.error = payload.error;
+      state.isLoading = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createUser.pending, (state) => {
@@ -94,5 +111,7 @@ const userSlice = createSlice({
       });
   },
 });
+
+export const { logout, setError, setLoading } = userSlice.actions;
 
 export default userSlice.reducer;

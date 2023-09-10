@@ -6,9 +6,35 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/solid";
 import { IconButton } from "@material-tailwind/react";
+import { signOut } from "firebase/auth";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  logout,
+  setError,
+  setLoading,
+} from "../../redux/features/users/userSlices";
+import { auth } from "../../utils/firebase.config";
 import NavigationLink from "../NavigationLink";
 
 export function Sidebar() {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.userSlice);
+  console.log(data);
+
+  const handelLogOut = () => {
+    dispatch(setLoading(true));
+    signOut(auth)
+      .then(() => {
+        toast.success("Logout successful!");
+        dispatch(logout());
+      })
+      .catch((error) => {
+        toast.error(error);
+        setError({ error: error });
+      });
+  };
+
   return (
     <div className="min-h-screen sticky top-0 border-r-2 border-secondary/20 flex flex-col justify-between items-center">
       <div className="flex flex-col items-center gap-5 h-full py-5">
@@ -27,7 +53,7 @@ export function Sidebar() {
         </NavigationLink>
       </div>
       <div className="mb-10">
-        <IconButton>
+        <IconButton onClick={handelLogOut}>
           <PowerIcon className="h-7 w-7 group-hover:text-white " />
         </IconButton>
       </div>
