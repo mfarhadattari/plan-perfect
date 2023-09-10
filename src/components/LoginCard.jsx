@@ -1,12 +1,35 @@
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../redux/features/users/userThunks";
 
 const LoginCard = () => {
   const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  // redux state
+  const dispatch = useDispatch();
+  const { email, isError, isLoading, error } = useSelector(
+    (state) => state.userSlice
+  );
+
+  // sign in notification handling
+  useEffect(() => {
+    if (!isLoading && email) {
+      toast.success("Login successful!");
+      reset();
+      navigate("/");
+    }
+    if (!isLoading && isError && error) {
+      toast.error(error);
+    }
+  }, [isLoading, email, reset, navigate, error, isError]);
+
+  const onSubmit = ({ email, password }) => {
+    dispatch(loginUser({ email, password }));
   };
 
   return (
@@ -43,7 +66,7 @@ const LoginCard = () => {
           Sign In
         </Button>
         <Typography color="gray" className="mt-4 text-center font-normal">
-          Don't have any account?{" "}
+          Not have any account?{" "}
           <Link to="/sign-up" className="font-medium text-gray-900">
             Sign Up
           </Link>

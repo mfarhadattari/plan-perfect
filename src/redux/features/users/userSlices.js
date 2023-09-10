@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createUser } from "./userThunks";
+import { createUser, loginUser } from "./userThunks";
 
 const initialState = {
   name: "",
@@ -33,6 +33,32 @@ const userSlice = createSlice({
         state.error = "";
       })
       .addCase(createUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.name = "";
+        state.email = "";
+        state.avatar = "";
+        state.error = action.error.message;
+      });
+      
+    builder
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.name = "";
+        state.email = "";
+        state.avatar = "";
+        state.error = "";
+      })
+      .addCase(loginUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.name = payload.name;
+        state.email = payload.email;
+        state.avatar = payload.avatar;
+        state.error = "";
+      })
+      .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.name = "";
