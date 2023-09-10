@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createUser, loginUser } from "./userThunks";
+import { createUser, loginUser, loginWithSocial } from "./userThunks";
 
 const initialState = {
   name: "",
@@ -40,7 +40,7 @@ const userSlice = createSlice({
         state.avatar = "";
         state.error = action.error.message;
       });
-      
+
     builder
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -59,6 +59,32 @@ const userSlice = createSlice({
         state.error = "";
       })
       .addCase(loginUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.name = "";
+        state.email = "";
+        state.avatar = "";
+        state.error = action.error.message;
+      });
+
+    builder
+      .addCase(loginWithSocial.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.name = "";
+        state.email = "";
+        state.avatar = "";
+        state.error = "";
+      })
+      .addCase(loginWithSocial.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.name = payload.name;
+        state.email = payload.email;
+        state.avatar = payload.avatar;
+        state.error = "";
+      })
+      .addCase(loginWithSocial.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.name = "";
