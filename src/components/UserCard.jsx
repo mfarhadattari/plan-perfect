@@ -7,9 +7,9 @@ import {
 
 const UserCard = ({ user }) => {
   return (
-    <Card className="w-80">
+    <Card className="w-[350px]">
       <CardHeader floated={false} className="h-72">
-        <img src={user?.avatar} alt={user?.name} />
+        <img src={user?.avatar} alt={user?.name} className="h-full w-full" />
       </CardHeader>
       <CardBody className="text-center">
         <Typography variant="h4" color="blue-gray" className="mb-2">

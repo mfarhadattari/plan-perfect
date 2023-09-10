@@ -1,22 +1,15 @@
+import { useSelector } from "react-redux";
 import UserCard from "../components/UserCard";
 
-const user = {
-  email: "mfarhad.dev@gmail.com",
-  name: "Mohammad Farhad",
-  avatar: "https://avatars.githubusercontent.com/u/121655696?v=4",
-  isLoading: false,
-  isError: false,
-  error: "",
-};
-
 const ProfilePage = () => {
+  const { name, email, avatar } = useSelector((state) => state.userSlice);
   return (
     <div className="h-screen px-5 md:px-10 pt-10">
       <div>
         <h1 className="font-semibold text-3xl uppercase">Profile</h1>
       </div>
-      <div className="mt-10 flex justify-center items-center">
-        <UserCard user={user} />
+      <div className="mt-10 lg:mt-16 flex justify-center items-center">
+        <UserCard user={{ name, email, avatar }} />
       </div>
     </div>
   );

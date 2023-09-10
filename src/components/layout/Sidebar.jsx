@@ -9,7 +9,7 @@ import {
 import { IconButton } from "@material-tailwind/react";
 import { signOut } from "firebase/auth";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   logout,
@@ -21,8 +21,6 @@ import NavigationLink from "../NavigationLink";
 
 export function Sidebar() {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.userSlice);
-  console.log(data);
 
   const handelLogOut = () => {
     dispatch(setLoading(true));
