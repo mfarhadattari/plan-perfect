@@ -43,17 +43,19 @@ const SocialLoginCard = () => {
 
   return (
     <div>
-      <h1 className="text-center my-2 text-xl font-medium">Continue with</h1>
-      <div className="flex justify-center gap-5">
+      <h1 className="text-center my-2 text-md font-medium text-gray-600">
+        Continue with
+      </h1>
+      <div className="flex justify-center gap-7 mt-5">
         <IconButton
-          className="rounded-full bg-white text-3xl"
+          className="rounded-full bg-white text-5xl"
           onClick={loginInWithGoogle}
         >
           <FcGoogle />
         </IconButton>
         <IconButton
           onClick={loginInWithGithub}
-          className="rounded-full text-3xl bg-white text-gray-900"
+          className="rounded-full text-[45px] bg-white text-gray-900"
         >
           <FaGithub />
         </IconButton>

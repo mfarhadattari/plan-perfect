@@ -42,10 +42,7 @@ const SignUpCard = () => {
       >
         Sign Up
       </Typography>
-      <form
-        className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="mt-8 mb-2 w-80" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4 flex flex-col gap-6">
           <Input
             required
@@ -80,7 +77,10 @@ const SignUpCard = () => {
         <Button type="submit" className="mt-6" fullWidth>
           Sign Up
         </Button>
-        <Typography color="gray" className="mt-4 text-center font-normal">
+        <Typography
+          color="gray"
+          className="mt-4 text-center font-normal text-base"
+        >
           Already have an account?{" "}
           <Link to="/login" className="font-medium text-gray-900">
             Sign In
