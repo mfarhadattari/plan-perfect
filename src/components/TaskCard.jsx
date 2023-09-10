@@ -4,19 +4,32 @@ import {
   PlayCircleIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
+import {
+  useArchiveTaskMutation,
+  useDeleteTaskMutation,
+  useUpdateTaskStatusMutation,
+} from "../redux/features/tasks/taskApi";
 
 const TaskCard = ({ task }) => {
+  // task status
   let updatedStatus;
-
   if (task.status === "pending") {
-    updatedStatus = "running";
-  } else if (task.status === "running") {
-    updatedStatus = "done";
-  } else {
-    updatedStatus = "archive";
+    updatedStatus = "in progress";
+  } else if (task.status === "in progress") {
+    updatedStatus = "completed";
   }
 
-  console.log(updatedStatus);
+  // ! Task update handler
+  const [updateTaskStatus] = useUpdateTaskStatusMutation();
+  const taskUpdateHandler = (id) => {
+    updateTaskStatus({ id, data: { status: updatedStatus } });
+  };
+
+  // ! Task Delete Handler
+  const [deleteTask] = useDeleteTaskMutation();
+
+  // ! Archive Task Handler
+  const [archiveTask] = useArchiveTaskMutation();
 
   return (
     <div className="bg-gray-100 bg-opacity-50 rounded-md p-5">
@@ -34,12 +47,14 @@ const TaskCard = ({ task }) => {
         <p>{task?.date}</p>
         <div className="flex gap-3">
           {task?.status === "pending" && (
-            <button title="Delete">
+            //! -------------- Delete Task Button ---------
+            <button title="Delete" onClick={() => deleteTask(task._id)}>
               <TrashIcon className="h-6 w-6 text-red-500" />
             </button>
           )}
           {task?.status !== "completed" ? (
-            <button>
+            //! ------------- Task Update btn -----------
+            <button onClick={() => taskUpdateHandler(task._id)}>
               {task?.status === "in progress" ? (
                 <CheckCircleIcon
                   title="Make Completed"
@@ -53,7 +68,8 @@ const TaskCard = ({ task }) => {
               )}
             </button>
           ) : (
-            <button title="Archive">
+            //! -------------  Archive Task Btn -----------
+            <button title="Archive" onClick={() => archiveTask(task._id)}>
               <ArchiveBoxIcon className="h-6 w-6 text-red-500" />
             </button>
           )}

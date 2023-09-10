@@ -9,10 +9,17 @@ import {
   Textarea,
   Typography,
 } from "@material-tailwind/react";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { useAddTaskMutation } from "../redux/features/tasks/taskApi";
 
 const AddTaskModal = ({ open, setOpen }) => {
   const handleOpen = () => setOpen((cur) => !cur);
+
+  const [addTask, { data: addTaskRes }] = useAddTaskMutation();
+  const { email, name } = useSelector((state) => state.userSlice);
 
   const {
     register,
@@ -22,9 +29,25 @@ const AddTaskModal = ({ open, setOpen }) => {
     formState: { errors },
   } = useForm();
 
+  // add task handler
   const onSubmit = (data) => {
-    console.log(data);
+    const task = {
+      ...data,
+      userEmail: email,
+      userName: name,
+      status: "pending",
+    };
+    addTask(task);
   };
+
+  // notification handler
+  useEffect(() => {
+    if (addTaskRes && addTaskRes?.insertedId) {
+      setOpen(false);
+      reset();
+      toast.success("Task added successfully!");
+    }
+  }, [addTaskRes, reset, setOpen]);
 
   return (
     <>
