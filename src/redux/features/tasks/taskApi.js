@@ -34,7 +34,7 @@ const taskApi = baseApi.injectEndpoints({
         url: `archive-task/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["tasks"],
+      invalidatesTags: ["tasks", "archives"],
     }),
   }),
 });

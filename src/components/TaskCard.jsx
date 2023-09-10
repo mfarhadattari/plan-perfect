@@ -4,6 +4,8 @@ import {
   PlayCircleIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 import {
   useArchiveTaskMutation,
   useDeleteTaskMutation,
@@ -26,10 +28,20 @@ const TaskCard = ({ task }) => {
   };
 
   // ! Task Delete Handler
-  const [deleteTask] = useDeleteTaskMutation();
+  const [deleteTask, { data: deletedRes }] = useDeleteTaskMutation();
 
   // ! Archive Task Handler
-  const [archiveTask] = useArchiveTaskMutation();
+  const [archiveTask, { data: achievedRes }] = useArchiveTaskMutation();
+
+  // notification handler
+  useEffect(() => {
+    if (deletedRes && deletedRes?.deletedCount) {
+      toast.success("Deleted Successfully!");
+    }
+    if (achievedRes && achievedRes.insertedId) {
+      toast.success("Achieved Successfully!");
+    }
+  }, [deletedRes, achievedRes]);
 
   return (
     <div className="bg-gray-100 bg-opacity-50 rounded-md p-5">
