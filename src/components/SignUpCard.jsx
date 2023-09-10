@@ -1,12 +1,35 @@
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { createUser } from "../redux/features/users/userThunks";
 
 const SignUpCard = () => {
   const { register, handleSubmit, reset } = useForm();
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  // redux state
+  const dispatch = useDispatch();
+  const { email, isError, isLoading, error } = useSelector(
+    (state) => state.userSlice
+  );
+
+  // sign up notification handling
+  useEffect(() => {
+    if (!isLoading && email) {
+      toast.success("Sign up successful!");
+      reset();
+      navigate("/");
+    }
+    if (!isLoading && isError && error) {
+      toast.error(error);
+    }
+  }, [isLoading, email, reset, navigate, error, isError]);
+
+  const onSubmit = ({ name, email, avatar, password }) => {
+    dispatch(createUser({ name, email, avatar, password }));
   };
 
   return (
