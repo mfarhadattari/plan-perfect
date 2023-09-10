@@ -1,6 +1,7 @@
 import {
   ArchiveBoxIcon,
   Cog6ToothIcon,
+  HomeIcon,
   PowerIcon,
   SquaresPlusIcon,
   UserCircleIcon,
@@ -9,6 +10,7 @@ import { IconButton } from "@material-tailwind/react";
 import { signOut } from "firebase/auth";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   logout,
   setError,
@@ -38,8 +40,13 @@ export function Sidebar() {
   return (
     <div className="min-h-screen sticky top-0 border-r-2 border-secondary/20 flex flex-col justify-between items-center">
       <div className="flex flex-col items-center gap-5 h-full py-5">
-        <img src="/icon.png" alt="logo" height={40} width={40} />
+        <Link to="/">
+          <img src="/icon.png" alt="logo" height={40} width={40} />
+        </Link>
         <NavigationLink to="/">
+          <HomeIcon className="h-7 w-7 group-hover:text-white" />
+        </NavigationLink>
+        <NavigationLink to="/task">
           <SquaresPlusIcon className="h-7 w-7 group-hover:text-white" />
         </NavigationLink>
         <NavigationLink to="/archive">

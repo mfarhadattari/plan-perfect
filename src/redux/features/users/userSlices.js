@@ -14,11 +14,19 @@ const userSlice = createSlice({
   name: "userSlice",
   initialState,
   reducers: {
+    setUser: (state, { payload }) => {
+      state.name = payload.name;
+      state.email = payload.email;
+      state.avatar = payload.avatar;
+      state.isLoading = false;
+      state.isError = false;
+      state.error = "";
+    },
     logout: (state) => {
       state.name = "";
       state.email = "";
       state.avatar = "";
-      state.isLoading = true;
+      state.isLoading = false;
       state.isError = false;
       state.error = "";
     },
@@ -26,7 +34,7 @@ const userSlice = createSlice({
       state.isLoading = payload;
     },
     setError: (state, { payload }) => {
-      state.isError = true;
+      state.isError = payload.isError;
       state.error = payload.error;
       state.isLoading = false;
     },
@@ -112,6 +120,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { logout, setError, setLoading } = userSlice.actions;
+export const { logout, setError, setLoading, setUser } = userSlice.actions;
 
 export default userSlice.reducer;

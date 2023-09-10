@@ -3,12 +3,13 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { createUser } from "../redux/features/users/userThunks";
 
 const SignUpCard = () => {
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
+  const redirectFrom = useLocation()?.state?.from?.pathname || "/";
 
   // redux state
   const dispatch = useDispatch();
@@ -21,12 +22,12 @@ const SignUpCard = () => {
     if (!isLoading && email) {
       toast.success("Sign up successful!");
       reset();
-      navigate("/");
+      navigate(redirectFrom);
     }
     if (!isLoading && isError && error) {
       toast.error(error);
     }
-  }, [isLoading, email, reset, navigate, error, isError]);
+  }, [isLoading, email, reset, navigate, error, isError, redirectFrom]);
 
   const onSubmit = ({ name, email, avatar, password }) => {
     dispatch(createUser({ name, email, avatar, password }));
