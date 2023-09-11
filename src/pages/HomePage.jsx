@@ -1,14 +1,14 @@
 import { LockClosedIcon, Square3Stack3DIcon } from "@heroicons/react/24/solid";
 import { Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
-import banner from "./../assets/banner.avif";
+import banner from "./../assets/banner.png";
 
 const HomePage = () => {
   return (
-    <div className="h-screen">
-      <div className="grid grid-col-1 lg:grid-cols-2 justify-between items-center">
-        <div className="flex justify-center items-center ms-10 mt-10 md:mt-20 lg:mt-0">
-          <div className="p-5 h-fit">
+    <div className="flex justify-center">
+      <div className="flex flex-col-reverse md:flex-row  justify-center items-center mt-20 w-full">
+        <div className="flex justify-start items-center ms-10 md:mt-20 lg:mt-0 w-full">
+          <div className="p-5">
             <p className="text-blue-gray-600 text-xs w-fit rounded-md font-bold uppercase">
               TODO Management ---------
             </p>
@@ -41,8 +41,8 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-full">
-          <img src={banner} alt="Home Banner" className="h-full w-full" />
+        <div className="w-full">
+          <img src={banner} alt="Home Banner" className="max-w-full" />
         </div>
       </div>
     </div>

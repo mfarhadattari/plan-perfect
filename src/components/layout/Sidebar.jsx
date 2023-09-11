@@ -19,6 +19,7 @@ import {
 } from "../../redux/features/users/userSlices";
 import { auth } from "../../utils/firebase.config";
 import NavigationLink from "../NavigationLink";
+import ThemeToggler from "./ThemeToggler";
 
 export function Sidebar() {
   const dispatch = useDispatch();
@@ -45,37 +46,41 @@ export function Sidebar() {
           <img src="/icon.png" alt="logo" height={40} width={40} />
         </Link>
         <NavigationLink to="/">
-          <HomeIcon className="h-7 w-7 group-hover:text-white" />
+          <HomeIcon className="h-6 w-6 group-hover:text-white" />
         </NavigationLink>
         <NavigationLink to="/task">
-          <Square3Stack3DIcon className="h-7 w-7 group-hover:text-white" />
+          <Square3Stack3DIcon className="h-6 w-6 group-hover:text-white" />
         </NavigationLink>
         <NavigationLink to="/archive">
-          <ArchiveBoxIcon className="h-7 w-7 group-hover:text-white" />
+          <ArchiveBoxIcon className="h-6 w-6 group-hover:text-white" />
         </NavigationLink>
         <NavigationLink to="/profile">
-          <UserCircleIcon className="h-7 w-7 group-hover:text-white " />
+          <UserCircleIcon className="h-6 w-6 group-hover:text-white " />
         </NavigationLink>
         <NavigationLink to="/setting">
-          <WrenchScrewdriverIcon className="h-7 w-7 group-hover:text-white " />
+          <WrenchScrewdriverIcon className="h-6 w-6 group-hover:text-white " />
         </NavigationLink>
       </div>
-      <div className="mb-10">
+      <div className="mb-10 flex flex-col gap-3 items-center">
         {email ? (
           <IconButton
-            className="bg-deep-orange-600"
+            variant="text"
+            className="text-deep-orange-600"
             onClick={handelLogOut}
             title="Logout"
           >
-            <ArrowRightOnRectangleIcon className="h-7 w-7 group-hover:text-white " />
+            <ArrowRightOnRectangleIcon className="h-6 w-6 group-hover:text-white " />
           </IconButton>
         ) : (
           <Link to="/login" title="Login">
-            <IconButton className="bg-deep-orange-600">
-              <LockClosedIcon className="h-7 w-7 group-hover:text-white " />
+            <IconButton className="text-deep-orange-600" variant="text">
+              <LockClosedIcon className="h-6 w-6 group-hover:text-white " />
             </IconButton>
           </Link>
         )}
+        <div>
+          <ThemeToggler />
+        </div>
       </div>
     </div>
   );

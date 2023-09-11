@@ -41,11 +41,7 @@ const SignUpCard = () => {
 
   return (
     <Card color="transparent" shadow={false}>
-      <Typography
-        variant="h4"
-        color="blue-gray"
-        className="text-center uppercase"
-      >
+      <Typography variant="h4" className="text-center uppercase">
         Sign Up
       </Typography>
       <form className="mt-8 mb-2 w-80" onSubmit={handleSubmit(onSubmit)}>
@@ -80,7 +76,7 @@ const SignUpCard = () => {
           />
         </div>
 
-        <Button type="submit" className="mt-6" fullWidth>
+        <Button type="submit" className="mt-6 bg-deep-orange-600" fullWidth>
           Sign Up
         </Button>
         <Typography
@@ -88,7 +84,7 @@ const SignUpCard = () => {
           className="mt-4 text-center font-normal text-base"
         >
           Already have an account?{" "}
-          <Link to="/login" className="font-medium text-gray-900">
+          <Link to="/login" className="font-medium">
             Sign In
           </Link>
         </Typography>

@@ -55,7 +55,7 @@ const SocialLoginCard = () => {
       </h1>
       <div className="flex justify-center gap-7 mt-5">
         <IconButton
-          className="rounded-full bg-white text-5xl"
+          className="rounded-full bg-transparent text-5xl"
           onClick={loginInWithGoogle}
         >
           <FcGoogle />
