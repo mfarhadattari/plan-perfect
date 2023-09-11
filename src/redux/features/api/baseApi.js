@@ -21,9 +21,15 @@ const baseApi = createApi({
         body: { email: email },
       }),
     }),
+    clearData: builder.mutation({
+      query: (email) => ({
+        url: `/clear-data?email=${email}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGenerateJWTMutation } = baseApi;
+export const { useGenerateJWTMutation, useClearDataMutation } = baseApi;
 
 export default baseApi;

@@ -32,6 +32,7 @@ export function Sidebar() {
       .then(() => {
         toast.success("Logout successful!");
         dispatch(logout());
+        localStorage.removeItem("plan-perfect-token");
       })
       .catch((error) => {
         toast.error(error);

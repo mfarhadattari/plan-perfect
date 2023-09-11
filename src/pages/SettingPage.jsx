@@ -1,5 +1,5 @@
+import ChangePasswordCard from "../components/Cards/ChangePasswordCard";
 import DeleteUserCard from "../components/Cards/DeleteUserCard";
-import ResetPasswordCard from "../components/Cards/ResetPasswordCard";
 
 const SettingPage = () => {
   return (
@@ -9,7 +9,7 @@ const SettingPage = () => {
       </div>
       <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
         <DeleteUserCard />
-        <ResetPasswordCard />
+        <ChangePasswordCard />
       </div>
     </div>
   );
