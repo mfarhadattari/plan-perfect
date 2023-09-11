@@ -9,14 +9,17 @@ import {
   Textarea,
   Typography,
 } from "@material-tailwind/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useAddTaskMutation } from "../redux/features/tasks/taskApi";
+import Loading from "./Loading";
 
 const AddTaskModal = ({ open, setOpen }) => {
   const handleOpen = () => setOpen((cur) => !cur);
+
+  const [isOpenLoading, setIsOpenLoading] = useState(false);
 
   const [addTask, { data: addTaskRes }] = useAddTaskMutation();
   const { email, name } = useSelector((state) => state.userSlice);
@@ -31,6 +34,7 @@ const AddTaskModal = ({ open, setOpen }) => {
 
   // add task handler
   const onSubmit = (data) => {
+    setIsOpenLoading(true);
     const task = {
       ...data,
       userEmail: email,
@@ -46,6 +50,9 @@ const AddTaskModal = ({ open, setOpen }) => {
       setOpen(false);
       reset();
       toast.success("Task added successfully!");
+    }
+    if (addTaskRes) {
+      setIsOpenLoading(false);
     }
   }, [addTaskRes, reset, setOpen]);
 
@@ -118,6 +125,7 @@ const AddTaskModal = ({ open, setOpen }) => {
           </form>
         </Card>
       </Dialog>
+      <Loading isOpenLoading={isOpenLoading} />
     </>
   );
 };

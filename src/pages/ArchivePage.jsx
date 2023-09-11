@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import ArchiveCard from "../components/ArchiveCard";
+import ArchiveCard from "../components/Cards/ArchiveCard";
 import Loader from "../components/Loader";
 import { useGetArchiveQuery } from "../redux/features/archive/archiveApi";
 

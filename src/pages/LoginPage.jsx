@@ -1,5 +1,5 @@
-import LoginCard from "../components/LoginCard";
-import SocialLoginCard from "../components/SocialLoginCard";
+import LoginCard from "../components/Cards/LoginCard";
+import SocialLoginCard from "../components/Cards/SocialLoginCard";
 
 const LoginPage = () => {
   return (

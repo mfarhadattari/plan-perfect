@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import AddTaskModal from "../components/AddTaskModal";
+import TaskCard from "../components/Cards/TaskCard";
 import Loader from "../components/Loader";
-import TaskCard from "../components/TaskCard";
 import { useGetTaskQuery } from "../redux/features/tasks/taskApi";
 
 const TaskPage = () => {

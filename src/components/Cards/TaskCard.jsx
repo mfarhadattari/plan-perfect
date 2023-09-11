@@ -4,13 +4,14 @@ import {
   PlayCircleIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import {
   useArchiveTaskMutation,
   useDeleteTaskMutation,
   useUpdateTaskStatusMutation,
-} from "../redux/features/tasks/taskApi";
+} from "../../redux/features/tasks/taskApi";
+import Loading from "../Loading";
 
 const TaskCard = ({ task }) => {
   // task status
@@ -21,17 +22,29 @@ const TaskCard = ({ task }) => {
     updatedStatus = "completed";
   }
 
+  const [isOpenLoading, setIsOpenLoading] = useState(false);
+
   // ! Task update handler
-  const [updateTaskStatus] = useUpdateTaskStatusMutation();
+  const [updateTaskStatus, { data: updatedRes }] =
+    useUpdateTaskStatusMutation();
   const taskUpdateHandler = (id) => {
+    setIsOpenLoading(true);
     updateTaskStatus({ id, data: { status: updatedStatus } });
   };
 
   // ! Task Delete Handler
   const [deleteTask, { data: deletedRes }] = useDeleteTaskMutation();
+  const handelDeleteTask = (id) => {
+    setIsOpenLoading(true);
+    deleteTask(id);
+  };
 
   // ! Archive Task Handler
   const [archiveTask, { data: achievedRes }] = useArchiveTaskMutation();
+  const handelArchiveTask = (id) => {
+    setIsOpenLoading(true);
+    archiveTask(id);
+  };
 
   // notification handler
   useEffect(() => {
@@ -41,7 +54,10 @@ const TaskCard = ({ task }) => {
     if (achievedRes && achievedRes.insertedId) {
       toast.success("Achieved Successfully!");
     }
-  }, [deletedRes, achievedRes]);
+    if (updatedRes || achievedRes || deletedRes) {
+      setIsOpenLoading(false);
+    }
+  }, [deletedRes, achievedRes, updatedRes]);
 
   return (
     <div className="bg-gray-100 bg-opacity-50 rounded-md p-5">
@@ -60,7 +76,7 @@ const TaskCard = ({ task }) => {
         <div className="flex gap-3">
           {task?.status === "pending" && (
             //! -------------- Delete Task Button ---------
-            <button title="Delete" onClick={() => deleteTask(task._id)}>
+            <button title="Delete" onClick={() => handelDeleteTask(task._id)}>
               <TrashIcon className="h-6 w-6 text-red-500" />
             </button>
           )}
@@ -81,12 +97,13 @@ const TaskCard = ({ task }) => {
             </button>
           ) : (
             //! -------------  Archive Task Btn -----------
-            <button title="Archive" onClick={() => archiveTask(task._id)}>
+            <button title="Archive" onClick={() => handelArchiveTask(task._id)}>
               <ArchiveBoxIcon className="h-6 w-6 text-red-500" />
             </button>
           )}
         </div>
       </div>
+      <Loading isOpenLoading={isOpenLoading} />
     </div>
   );
 };

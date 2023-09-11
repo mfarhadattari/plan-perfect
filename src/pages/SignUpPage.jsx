@@ -1,5 +1,5 @@
-import SignUpCard from "../components/SignUpCard";
-import SocialLoginCard from "../components/SocialLoginCard";
+import SignUpCard from "../components/Cards/SignUpCard";
+import SocialLoginCard from "../components/Cards/SocialLoginCard";
 
 const SignUpPage = () => {
   return (

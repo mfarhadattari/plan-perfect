@@ -1,15 +1,18 @@
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { createUser } from "../redux/features/users/userThunks";
+import { loginUser } from "../../redux/features/users/userThunks";
+import Loading from "../Loading";
 
-const SignUpCard = () => {
+const LoginCard = () => {
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
   const redirectFrom = useLocation()?.state?.from?.pathname || "/";
+
+  const [isOpenLoading, setIsOpenLoading] = useState(false);
 
   // redux state
   const dispatch = useDispatch();
@@ -17,20 +20,23 @@ const SignUpCard = () => {
     (state) => state.userSlice
   );
 
-  // sign up notification handling
+  // sign in notification handling
   useEffect(() => {
     if (!isLoading && email) {
-      toast.success("Sign up successful!");
+      setIsOpenLoading(false);
+      toast.success("Login successful!");
       reset();
       navigate(redirectFrom);
     }
     if (!isLoading && isError && error) {
+      setIsOpenLoading(false);
       toast.error(error);
     }
   }, [isLoading, email, reset, navigate, error, isError, redirectFrom]);
 
-  const onSubmit = ({ name, email, avatar, password }) => {
-    dispatch(createUser({ name, email, avatar, password }));
+  const onSubmit = ({ email, password }) => {
+    setIsOpenLoading(true);
+    dispatch(loginUser({ email, password }));
   };
 
   return (
@@ -40,30 +46,16 @@ const SignUpCard = () => {
         color="blue-gray"
         className="text-center uppercase"
       >
-        Sign Up
+        Sign In
       </Typography>
       <form className="mt-8 mb-2 w-80" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4 flex flex-col gap-6">
-          <Input
-            required
-            type="text"
-            size="lg"
-            label="Name"
-            {...register("name")}
-          />
           <Input
             required
             type="email"
             size="lg"
             label="Email"
             {...register("email")}
-          />
-          <Input
-            required
-            type="url"
-            size="lg"
-            label="Avatar"
-            {...register("avatar")}
           />
           <Input
             type="password"
@@ -75,20 +67,18 @@ const SignUpCard = () => {
         </div>
 
         <Button type="submit" className="mt-6" fullWidth>
-          Sign Up
+          Sign In
         </Button>
-        <Typography
-          color="gray"
-          className="mt-4 text-center font-normal text-base"
-        >
-          Already have an account?{" "}
-          <Link to="/login" className="font-medium text-gray-900">
-            Sign In
+        <Typography color="gray" className="mt-4 text-center font-normal">
+          Not have any account?{" "}
+          <Link to="/sign-up" className="font-medium text-gray-900">
+            Sign Up
           </Link>
         </Typography>
       </form>
+      <Loading isOpenLoading={isOpenLoading} />
     </Card>
   );
 };
 
-export default SignUpCard;
+export default LoginCard;
