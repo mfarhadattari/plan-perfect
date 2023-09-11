@@ -16,7 +16,7 @@ const MainProvider = () => {
 
   return (
     <div
-      className={`font-fira-code max-w-full h-full ${
+      className={`font-fira-code w-full h-full ${
         theme === "dark" ? "bg-black text-white bg-opacity-90" : " bg-white"
       }`}
     >
