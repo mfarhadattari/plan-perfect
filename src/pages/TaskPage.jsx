@@ -17,7 +17,7 @@ const TaskPage = () => {
   return (
     <>
       <AddTaskModal open={open} setOpen={setOpen} />
-      <div className="h-screen px-5 md:px-10 pt-10">
+      <div className="min-h-screen px-5 md:px-10 pt-10">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="font-semibold text-3xl uppercase">MY Tasks</h1>

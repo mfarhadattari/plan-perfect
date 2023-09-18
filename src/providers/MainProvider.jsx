@@ -16,8 +16,8 @@ const MainProvider = () => {
 
   return (
     <div
-      className={`font-fira-code w-full h-full ${
-        theme === "dark" ? "bg-black text-white bg-opacity-90" : " bg-white"
+      className={`font-fira-code w-full min-h-screen ${
+        theme === "dark" ? "bg-black text-white bg-opacity-90 " : " bg-white"
       }`}
     >
       <RouterProvider router={routes} />

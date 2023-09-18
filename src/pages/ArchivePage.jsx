@@ -9,7 +9,7 @@ const ArchivePage = () => {
   const { data: archives = [], isLoading } = useGetArchiveQuery(email);
 
   return (
-    <div className="h-screen px-5 md:px-10 pt-10">
+    <div className="min-h-screen px-5 md:px-10 pt-10">
       <div>
         <h1 className="font-semibold text-3xl uppercase">Archives</h1>
       </div>

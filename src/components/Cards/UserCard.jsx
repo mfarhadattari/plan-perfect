@@ -10,7 +10,7 @@ const UserCard = ({ user }) => {
     <div className="w-full">
       <Card className="w-[250px] h-[300px] md:w-80 md:h-96 mx-auto ">
         <CardHeader floated={false}>
-          <img src={user?.avatar} alt={user?.name} className="h-full w-full" />
+          <img src={user?.avatar} alt={user?.name} className=" w-full" />
         </CardHeader>
         <CardBody className="text-center">
           <Typography

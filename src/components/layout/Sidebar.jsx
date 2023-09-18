@@ -41,8 +41,8 @@ export function Sidebar() {
   };
 
   return (
-    <div className="min-h-screen sticky top-0 border-r-2 border-secondary/20 flex flex-col justify-between items-center">
-      <div className="flex flex-col items-center gap-5 h-full py-5">
+    <div className=" sticky top-0 border-r-2 border-secondary/20 flex flex-col justify-between items-center min-h-screen">
+      <div className="flex flex-col items-center gap-5  py-5">
         <Link to="/">
           <img src="/icon.png" alt="logo" height={40} width={40} />
         </Link>

@@ -5,9 +5,9 @@ import banner from "./../assets/banner.png";
 
 const HomePage = () => {
   return (
-    <div className="flex justify-center">
+    <div className=" py-10">
       <div className="flex flex-col-reverse md:flex-row  justify-center items-center mt-20 w-full">
-        <div className="flex justify-start items-center ms-10 md:mt-20 lg:mt-0 w-full">
+        <div className="flex justify-start items-center md:mt-20 lg:mt-0 w-full">
           <div className="p-5">
             <p className="text-blue-gray-600 text-xs w-fit rounded-md font-bold uppercase">
               TODO Management ---------
