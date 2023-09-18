@@ -3,20 +3,18 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { loginUser } from "../../redux/features/users/userThunks";
 import Loading from "../Loading";
 
 const LoginCard = () => {
   const { register, handleSubmit, reset } = useForm();
-  const navigate = useNavigate();
-  const redirectFrom = useLocation()?.state?.from?.pathname || "/";
-
   const [isOpenLoading, setIsOpenLoading] = useState(false);
 
   // redux state
   const dispatch = useDispatch();
-  const { email, isError, isLoading, error } = useSelector(
+
+  const { isError, isLoading, error, email } = useSelector(
     (state) => state.userSlice
   );
 
@@ -24,15 +22,13 @@ const LoginCard = () => {
   useEffect(() => {
     if (!isLoading && email) {
       setIsOpenLoading(false);
-      toast.success("Login successful!");
       reset();
-      navigate(redirectFrom);
     }
     if (!isLoading && isError && error) {
       setIsOpenLoading(false);
       toast.error(error);
     }
-  }, [isLoading, email, reset, navigate, error, isError, redirectFrom]);
+  }, [isLoading, error, isError, setIsOpenLoading, email, reset]);
 
   const onSubmit = ({ email, password }) => {
     setIsOpenLoading(true);

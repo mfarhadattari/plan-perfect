@@ -25,7 +25,7 @@ const ArchiveCard = ({ archive }) => {
   }, [deletedRes]);
 
   return (
-    <div className="bg-gray-100 bg-opacity-70 rounded-md p-7">
+    <div className="bg-white text-black border border-[#0B1120] rounded-md p-7">
       <h1 className="text-lg font-semibold mb-3 text-red-500">
         {archive?.title}
       </h1>

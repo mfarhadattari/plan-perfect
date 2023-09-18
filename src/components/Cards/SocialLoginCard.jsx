@@ -5,19 +5,15 @@ import toast from "react-hot-toast";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
 import { loginWithSocial } from "../../redux/features/users/userThunks";
 import Loading from "../Loading";
 
 const SocialLoginCard = () => {
-  const navigate = useNavigate();
-  const redirectFrom = useLocation()?.state?.from?.pathname || "/";
-
   const [isOpenLoading, setIsOpenLoading] = useState(false);
 
   // redux state
   const dispatch = useDispatch();
-  const { email, isError, isLoading, error } = useSelector(
+  const { isError, isLoading, error, email } = useSelector(
     (state) => state.userSlice
   );
 
@@ -25,14 +21,12 @@ const SocialLoginCard = () => {
   useEffect(() => {
     if (!isLoading && email) {
       setIsOpenLoading(false);
-      toast.success("Login successful!");
-      navigate(redirectFrom);
     }
     if (!isLoading && isError && error) {
       setIsOpenLoading(false);
       toast.error(error);
     }
-  }, [isLoading, email, navigate, error, isError, redirectFrom]);
+  }, [isLoading, error, isError, setIsOpenLoading, email]);
 
   // sign in with google
   const loginInWithGoogle = () => {
